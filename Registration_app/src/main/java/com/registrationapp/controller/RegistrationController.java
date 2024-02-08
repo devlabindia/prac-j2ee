@@ -11,34 +11,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.registrationapp.model.DAOServiceImpl;
 
-@WebServlet("/LoginController")
-public class LoginController extends HttpServlet {
+
+@WebServlet("/RegistrationController")
+public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LoginController() {
+    public RegistrationController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/new_registration.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String course = request.getParameter("course");
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String mobile = request.getParameter("mobile");
 		
 		DAOServiceImpl service = new DAOServiceImpl();
 		service.connectDB();
+		service.createRegistration(name, course, email, mobile);
 		
-		boolean status = service.verifyLogin(email, password);
-		if(status) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/new_registration.jsp");
-			rd.forward(request, response);
-			
-		}else {
-			request.setAttribute("errorMsg", "Invalid Username/Password");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-		}
+		request.setAttribute("saveMsg", "Registration Created Successfully");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/new_registration.jsp");
+		rd.forward(request, response);
+		
+		
 		
 	}
 

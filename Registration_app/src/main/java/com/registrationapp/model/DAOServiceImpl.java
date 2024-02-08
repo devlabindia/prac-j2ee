@@ -30,8 +30,11 @@ public class DAOServiceImpl implements DAOService {
 
 	@Override
 	public void createRegistration(String name, String course, String email, String mobile) {
-		// TODO Auto-generated method stub
-		
+		try {
+			stmnt.executeUpdate("insert into registration values ('"+name+"','"+course+"','"+email+"','"+mobile+"')");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -45,6 +48,17 @@ public class DAOServiceImpl implements DAOService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public ResultSet readAllRegistrations() {
+		try {
+			ResultSet result = stmnt.executeQuery("select * from registration");
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	
 	
