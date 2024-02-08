@@ -49,8 +49,11 @@ public class DAOServiceImpl implements DAOService {
 
 	@Override
 	public void updateRegistration(String email, String mobile) {
-		// TODO Auto-generated method stub
-		
+		try {
+			stmnt.executeUpdate("update registration set mobile='"+mobile+"'where email='"+email+"'");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ResultSet readAllRegistrations() {

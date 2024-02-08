@@ -9,7 +9,7 @@
 </head>
 	<body>
 	<h2>Update Registration</h2>
-	<form action ="" method="post">
+	<form action ="UpdateRegistrationController" method="post">
 		<table>
 			<tr>
 				<td>Email:</td> <td><input type ="text" name="email" value ="<%=request.getAttribute("email")%>"></td>

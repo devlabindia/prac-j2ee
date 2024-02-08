@@ -9,6 +9,8 @@
 <body>
 	<a href="RegistrationController">New Registration</a>
 	<a href="GetRegistrationsController">All Registration</a>
-
+	<form action="LogoutController"method="post">
+		<input type ="submit" value="Logout">
+	</form>
 </body>
 </html>
