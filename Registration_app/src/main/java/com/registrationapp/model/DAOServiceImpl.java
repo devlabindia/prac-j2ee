@@ -39,7 +39,11 @@ public class DAOServiceImpl implements DAOService {
 
 	@Override
 	public void deleteRegistration(String email) {
-		// TODO Auto-generated method stub
+		try {
+			stmnt.executeUpdate("delete from registration where email='"+email+"'");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

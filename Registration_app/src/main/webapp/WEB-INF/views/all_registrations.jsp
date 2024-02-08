@@ -16,7 +16,7 @@
 			<th>Name</th>
 			<th>Course</th>
 			<th>Email</th>
-			<th>mobile</th>
+			<th>Mobile</th>
 		</tr>
 		<%
 		ResultSet result = (ResultSet)request.getAttribute("result");
@@ -27,6 +27,8 @@
 			<td><%=result.getString(2) %></td>
 			<td><%=result.getString(3) %></td>
 			<td><%=result.getString(4) %></td>
+			<td><a href="DeleteRegistrationController?emailId=<%=result.getString(3)%>">Delete</a></td>
+			<td><a href="UpdateRegistrationController?emailId=<%=result.getString(3)%>&mobile=<%=result.getString(4)%>">Update</a></td>
 		</tr>
 		
 		<%} %>
