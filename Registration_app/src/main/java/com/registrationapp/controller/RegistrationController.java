@@ -27,12 +27,14 @@ public class RegistrationController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		String name = request.getParameter("name");
 		String course = request.getParameter("course");
 		String email = request.getParameter("email");
 		String mobile = request.getParameter("mobile");
 		
 		HttpSession session = request.getSession(false);
+		session.setMaxInactiveInterval(90);
 		if(session.getAttribute("email")!=null) {
 			DAOServiceImpl service = new DAOServiceImpl();
 			service.connectDB();
@@ -45,5 +47,13 @@ public class RegistrationController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 		}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "Session timed out. Login Again!!");
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 }
